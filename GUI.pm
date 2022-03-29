@@ -66,7 +66,7 @@ sub start_gui {
     $top_box->set_homogeneous( FALSE );
     $eb->add( $top_box );
 
-    $hb->set_title( _( 'Virus Scanner' ) );
+    $hb->set_title( _( 'Virus Scanner of Group 6' ) );
     $hb->set_decoration_layout( 'menu:minimize,close' );
     $hb->set_show_close_button( TRUE );
 
@@ -215,7 +215,7 @@ sub add_config_panels {
 
     my @data = (
         {   link        => _( 'Settings' ),
-            description => _( 'View and set your preferences' ),
+            description => _( 'This view has been changed by Group6' ),
             image       => 'preferences-system',
             button      => FALSE,
         },
@@ -237,7 +237,7 @@ sub add_config_panels {
     );
 
     #<<<
-    my $theme = Gtk3::IconTheme->new;
+    # my $theme = Gtk3::IconTheme->new;
     for my $item ( @data ) {
         my $use_image = ClamTk::Icons->get_image($item->{image});
         my $iter = $liststore->append;
@@ -299,7 +299,7 @@ sub add_update_panels {
         },
         {   link        => _( 'Update Assistant' ),
             description => _( 'Signature update preferences' ),
-            image       => 'system-help',
+            image       => 'edit-undo',
             button      => FALSE,
         },
     );
@@ -437,6 +437,11 @@ sub add_analysis_panels {
             image       => 'folder-documents',
             button      => FALSE,
         },
+		{	link 		=> _( 'Virus Scanner' ),
+			description => _( 'New virus scanner of Group 6' ),
+			image		=> 'edit-find',
+			button		=> FALSE,
+		},
     );
 
     for my $item ( @scan_data ) {
@@ -456,6 +461,11 @@ sub add_analysis_panels {
         {   link        => _( 'Analysis' ),
             description => _( "View a file's reputation" ),
             image       => 'system-search',
+            button      => FALSE,
+        },
+		{   link        => _( 'About us' ),
+            description => _( "Team6 infomation" ),
+            image       => 'help-about',
             button      => FALSE,
         },
     );
@@ -536,6 +546,9 @@ sub iconview_react {
     } elsif ( $value eq _( 'Analysis' ) ) {
         ClamTk::Analysis->show_window;
         return TRUE;
+	} elsif ( $value eq _( 'About us' ) ) {
+		about_us();
+		return TRUE;
     } elsif ( $value eq _( 'Scan a file' ) ) {
         select_file();
         return TRUE;
@@ -716,6 +729,40 @@ sub about {
     $dialog->set_authors( [ 'Dave M', 'dave.nerd@gmail.com' ] );
     $dialog->set_comments(
         _( 'ClamTk is a graphical front-end for Clam Antivirus' ) );
+
+    $dialog->run;
+    $dialog->destroy;
+}
+
+sub about_us {
+	my $dialog = Gtk3::AboutDialog->new;
+    my $license
+        = 'ClamTk is free software; you can redistribute it and/or'
+        . ' modify it under the terms of either:'
+        . ' a) the GNU General Public License as published by the Free'
+        . ' Software Foundation; either version 1, or (at your option)'
+        . ' any later version, or'
+        . ' b) the "Artistic License".';
+    $dialog->set_wrap_license( TRUE );
+    $dialog->set_position( 'mouse' );
+
+	my $images_dir = ClamTk::App->get_path( 'images' );
+    my $icon       = "$images_dir/shield.png";
+    my $pixbuf     = Gtk3::Gdk::Pixbuf->new_from_file( $icon );
+
+    $dialog->set_logo( $pixbuf );
+    $dialog->set_version( ClamTk::App->get_TK_version() );
+    $dialog->set_license( $license );
+    $dialog->set_website_label( _( 'Virus scanner of Group6' ) );
+    $dialog->set_website( 'https://github.com/ISDevLearn/Antivirus' );
+    $dialog->set_logo( $pixbuf );
+    $dialog->set_translator_credits(
+        'Please see the credits.md for full listing' );
+    $dialog->set_copyright( "\x{a9} Group 6 2022" );
+    $dialog->set_program_name( 'Virus Scanner' );
+    $dialog->set_authors( [ 'Qibin Yab', 'Jinjie Liu', 'Wenjun Zhu', 'Jianyang Zhang' ] );
+    $dialog->set_comments(
+        _( 'Welcome to Team 6\'s Antivirus project' ) );
 
     $dialog->run;
     $dialog->destroy;
