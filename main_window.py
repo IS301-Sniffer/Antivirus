@@ -11,7 +11,7 @@ class main_window(QMainWindow, Ui_MainWindow):
         self.file_type = ""
         self.setupUi(self)
         self.file_label.setWordWrap(True) # 允许label换行
-        self.setWindowIcon(QIcon(QPixmap("./resources/images/virus_icon.png")))
+        self.setWindowIcon(QIcon(QPixmap("/home/virus/test/resources/images/virus_icon.png"))) # 这里图片是绝对路径，可以根据需要进行修改
         self.configure_button()
 
     def configure_button(self):

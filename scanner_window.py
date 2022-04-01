@@ -32,7 +32,7 @@ class Ui_MainWindow(object):
         self.graphicsView = QtWidgets.QGraphicsView(self.centralwidget)
         self.graphicsView.setGeometry(QtCore.QRect(90, 110, 221, 211))
         self.graphicsView.setAutoFillBackground(False)
-        self.graphicsView.setStyleSheet("background-image: url(./resources/images/virus_icon.png);padding:0px;border:0px;")
+        self.graphicsView.setStyleSheet("background-image: url(/home/virus/test/resources/images/virus_icon.png);padding:0px;border:0px;") # 这里的图片是绝对路径，可以根据需要进行修改
         self.graphicsView.setObjectName("graphicsView")
         self.openButton = QtWidgets.QPushButton(self.centralwidget)
         self.openButton.setGeometry(QtCore.QRect(150, 350, 111, 41))
