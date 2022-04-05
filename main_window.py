@@ -1,5 +1,8 @@
+from email import message
 from PyQt5.QtGui import QIcon, QPixmap
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox
+from PyQt5.QtCore import QSize
+from pefile import PEFormatError
 
 
 from scanner_window import Ui_MainWindow
@@ -25,8 +28,18 @@ class main_window(QMainWindow, Ui_MainWindow):
         self.file_label.setText(self.file_name.split("/")[-1])
 
     def scan(self):
-        # 这里插入扫描函数yourscan(filename)
-        if True:
-            print(QMessageBox.about(self, "检测结果", "是病毒"))
-        else:
-            QMessageBox.about(self, "检测结果", "不是病毒")
+        messageBox = QMessageBox(self)
+
+        try:
+            result = True
+            # result = MLScan(self.file_name) # MLScan就是真的scan函数
+            messageBox.setWindowTitle("Result")
+            if result:
+                messageBox.setText("检测到病毒！")
+            else:
+                messageBox.setText("不是病毒!")
+            messageBox.show()
+        except PEFormatError:
+            messageBox.setWindowTitle("Error")
+            messageBox.setText("文件格式错误")
+            messageBox.show()
