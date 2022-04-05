@@ -29,16 +29,16 @@ class main_window(QMainWindow, Ui_MainWindow):
             self, "选取文件", "./")
         self.file_label.setText(self.file_name.split("/")[-1])
 
-    def MLScan(file_name):
+    def MLScan(self,file_name):
         scanner = Scanner()
-        return scanner.isMalware()
+        return scanner.isMalware(file_name)
 
     def scan(self):
         messageBox = QMessageBox(self)
 
         try:
             result = True
-            result = MLScan(self.file_name)  # MLScan就是真的scan函数
+            result = self.MLScan(self.file_name)  # MLScan就是真的scan函数
             messageBox.setWindowTitle("Result")
             if result:
                 messageBox.setText("检测到病毒！")
