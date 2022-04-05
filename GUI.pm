@@ -763,7 +763,7 @@ sub about_us {
         'Please see the credits.md for full listing' );
     $dialog->set_copyright( "\x{a9} Group 6 2022" );
     $dialog->set_program_name( 'Virus Scanner' );
-    $dialog->set_authors( [ 'Qibin Yab', 'Jinjie Liu', 'Wenjun Zhu', 'Jianyang Zhang' ] );
+    $dialog->set_authors( [ 'Qibin Yan', 'Jinjie Liu', 'Wenjun Zhu', 'Jianyang Zhang' ] );
     $dialog->set_comments(
         _( 'Welcome to Team 6\'s Antivirus project' ) );
 
