@@ -1,8 +1,8 @@
 from PyQt5.QtGui import QIcon, QPixmap
-from PyQt5.QtWidgets import QMainWindow, QFileDialog
+from PyQt5.QtWidgets import QMainWindow, QFileDialog, QMessageBox
+
 
 from scanner_window import Ui_MainWindow
-
 
 class main_window(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
@@ -16,9 +16,17 @@ class main_window(QMainWindow, Ui_MainWindow):
 
     def configure_button(self):
         self.openButton.clicked.connect(self.open_dir)
+        self.scanButton.clicked.connect(self.scan)
 
     def open_dir(self):
         # dire = QFileDialog.getExistingDirectory(self, "选取文件夹", "./")
         # print(dire)
         self.file_name, self.file_type = QFileDialog.getOpenFileName(self, "选取文件", "./")
         self.file_label.setText(self.file_name.split("/")[-1])
+
+    def scan(self):
+        # 这里插入扫描函数yourscan(filename)
+        if True:
+            print(QMessageBox.about(self, "检测结果", "是病毒"))
+        else:
+            QMessageBox.about(self, "检测结果", "不是病毒")
